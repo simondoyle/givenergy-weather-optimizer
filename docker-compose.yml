@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  givenergy-optimizer:
+    build: .
+    container_name: givenergy-optimizer
+    restart: unless-stopped
+    environment:
+      - GIVENERGY_API_KEY=your_givenergy_api_key
+      - GIVENERGY_SYSTEM_ID=WO2227G735  # Your communication device ID
+      - WEATHER_API_KEY=your_openweathermap_api_key
+      - LOCATION_LAT=53.3498058  # Example: Dublin latitude
+      - LOCATION_LON=-6.2628303  # Example: Dublin longitude
+      - TIMEZONE=Europe/Dublin
+      - MIN_BATTERY_LEVEL=20.0  # Minimum battery level to trigger charging
+      - CHARGE_THRESHOLD=3.0    # Expected solar generation threshold in kWh
+    volumes:
+      - ./logs:/app/logs  # Optional: for persistent logs
